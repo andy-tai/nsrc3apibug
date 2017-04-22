@@ -1,0 +1,23 @@
+<ActionBar title="">
+  <NavigationButton text="" android.systemIcon="ic_menu_back" (tap)="onBack()">
+  </NavigationButton>
+</ActionBar>
+<StackLayout>
+    <ListView [items]="serviceList" height="90%">
+        <ng-template let-item="item">
+          <GridLayout rows="auto, auto" columns="3*,2*" (tap)="onActivate(item)">
+            <Label row="0" col="0" colSpan="2" [text]="item.displayName" class="medium"></Label>
+            <Label row="1" col="0" [text]="'IP: ' + item.ipAddr" class="small"></Label>
+            <Label row="1" col="1" [text]="'Port: ' + item.port" class="extra_small"></Label>
+          </GridLayout>
+        </ng-template>
+    </ListView>
+
+    <Image #refresh
+        src="res://refresh"
+        borderWidth=1 borderColor="lightgray"
+        padding="4"
+        height="10%" width="100%" verticalAlignment="center"
+        horizontalAlignment="center" (tap)="onRefresh()">
+    </Image>
+</StackLayout>
