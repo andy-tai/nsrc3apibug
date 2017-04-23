@@ -1,8 +1,3 @@
-/*
- *  Copyright 2017 Le Technology, Inc.
- *  written by Li-Cheng (Andy) Tai, andy.tai@le.com
- *
- */
 
 import { NgZone } from "@angular/core";
 
@@ -95,7 +90,7 @@ class IOSDiscoveryDelegate
         browser: NSNetServiceBrowser, service: NSNetService, moreComing: boolean): void {
         console.log("IOSDiscoveryDelegate: service joined: " + service + " more info coming " + moreComing);
         //console.dump(service);
-        if (service.name.startsWith(ServiceName.APOLLO_SERVICE_PREFIX)) {
+        {
             let delegate = IOSResolveDelegate.new();
             delegate.action = Action.ADD;
             service.delegate = delegate;
@@ -109,7 +104,7 @@ class IOSDiscoveryDelegate
 	netServiceBrowserDidRemoveServiceMoreComing(browser: NSNetServiceBrowser, service: NSNetService, moreComing: boolean): void {
         console.log("IOSDiscoveryDelegate: service left: " + service + " more info coming " + moreComing);
         //console.dump(service);
-        if (service.name.startsWith(ServiceName.APOLLO_SERVICE_PREFIX)) {
+        {
             let delegate = IOSResolveDelegate.new();
             delegate.action = Action.DELETE;
             service.delegate = delegate;
@@ -149,7 +144,7 @@ export class Zeroconf implements ZeroconfInterface {
             this.delegate = IOSDiscoveryDelegate.new(); // keeps a strong reference to the delegate object
             this.browser.delegate = this.delegate;
             this.browser.searchForServicesOfTypeInDomain(
-                ServiceName.APOLLO_SERVICE_TYPE,
+                ServiceName.SERVICE_TYPE,
                 Zeroconf.LOCAL
             );
         }

@@ -3,7 +3,7 @@ import { Routes } from "@angular/router";
 
 import { DiscoveryPage } from "./pages/discovery/discovery_page";
 
-const routes: Routes = [
+export const routes: Routes = [
     { path: "", redirectTo: "/discovery", pathMatch: "full" },
     { path: "discovery", component: DiscoveryPage },
 ];

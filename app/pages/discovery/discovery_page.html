@@ -5,7 +5,7 @@
 <StackLayout>
     <ListView [items]="serviceList" height="90%">
         <ng-template let-item="item">
-          <GridLayout rows="auto, auto" columns="3*,2*" (tap)="onActivate(item)">
+          <GridLayout rows="auto, auto" columns="3*,2*" >
             <Label row="0" col="0" colSpan="2" [text]="item.displayName" class="medium"></Label>
             <Label row="1" col="0" [text]="'IP: ' + item.ipAddr" class="small"></Label>
             <Label row="1" col="1" [text]="'Port: ' + item.port" class="extra_small"></Label>

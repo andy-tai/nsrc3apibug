@@ -1,8 +1,4 @@
-/*
- *  Copyright 2017 Le Technology, Inc.
- *  written by Li-Cheng (Andy) Tai, andy.tai@le.com
- *
- */
+
 
 import { Component, ElementRef, NgZone, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import {Location} from "@angular/common";
@@ -10,15 +6,12 @@ import { RouterExtensions } from "nativescript-angular/router";
 import {Page} from "ui/page";
 
 import {ServiceNode} from "../../data/service_node";
-import {UserState} from "../../data/user_state";
-import {DataService} from "../../data/data_service";
 
 var zeroConfModule = require("./zeroconf");
 
 @Component({
     selector: "discovery",
     moduleId: module.id,
-    providers: [DataService],
     templateUrl: "./discovery_page.html",
     styleUrls: ["./discovery_page-common.css", "./discovery_page.css"],
 
@@ -26,7 +19,6 @@ var zeroConfModule = require("./zeroconf");
 export class DiscoveryPage implements OnInit, OnDestroy {
     serviceList: Array<ServiceNode> = [];
     
-    protected userState: UserState;
     
     protected zeroconf;
     
@@ -38,7 +30,6 @@ export class DiscoveryPage implements OnInit, OnDestroy {
     }
 
     constructor(        
-        protected dataService: DataService,
         protected page: Page, 
         protected router: RouterExtensions,
         location: Location,
@@ -46,8 +37,6 @@ export class DiscoveryPage implements OnInit, OnDestroy {
         this.zeroconf = new zeroConfModule.Zeroconf(zone);
         DiscoveryPage.instance = this;
         page.actionBarHidden = false;
-        this.userState = UserState.getInstance();
-        console.log("page: " + this.page + " zone: " + this.zone);
     }
     
     onEnter() {
@@ -69,10 +58,6 @@ export class DiscoveryPage implements OnInit, OnDestroy {
             this.onExit();
         });
         
-        /*this.add(new ServiceNode("I: X4-55", "", "192.168.0.112", 3553));//test use
-        this.add(new ServiceNode("I: Media Room", "", "192.168.0.111", 3553));//test use
-        this.add(new ServiceNode("I: Peter's TV", "", "192.168.0.110", 3553));//test use
-        */
     }
 
     ngOnDestroy() {
@@ -86,7 +71,7 @@ export class DiscoveryPage implements OnInit, OnDestroy {
     
     onBack() {
         console.log("on back button");
-        this.router.backToPreviousPage();
+        this.router.back();
     }
     
     public add(service: ServiceNode) {
@@ -122,11 +107,5 @@ export class DiscoveryPage implements OnInit, OnDestroy {
     
     }
     
-    onActivate(node: ServiceNode) {
-        this.userState.currentNode = node;      
-        console.log("making service " + node.name + " the current one");
-        this.dataService.saveUserData();
-        this.router.backToPreviousPage();    
-    }
     
 }

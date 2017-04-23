@@ -1,8 +1,3 @@
-/*
- *  Copyright 2017 Le Technology, Inc.
- *  written by Li-Cheng (Andy) Tai, andy.tai@le.com
- *
- */
 
 
 import { NgZone } from "@angular/core";
@@ -84,7 +79,7 @@ class AndroidDiscoveryListener extends java.lang.Object
     
     onServiceFound(serviceInfo: android.net.nsd.NsdServiceInfo): void {
         console.log("in AndroidDiscoveryListener onServiceFound " + serviceInfo);
-        if (serviceInfo.getServiceName().startsWith(ServiceName.APOLLO_SERVICE_PREFIX)) {
+        {
             
             let resolveListener = new AndroidResolveListener();
             nsd.resolveService(serviceInfo, resolveListener);
@@ -94,7 +89,7 @@ class AndroidDiscoveryListener extends java.lang.Object
     
     onServiceLost(serviceInfo: android.net.nsd.NsdServiceInfo): void {
         console.log("in AndroidDiscoveryListener onServiceLost " + serviceInfo);
-        if (serviceInfo && serviceInfo.getServiceName().startsWith(ServiceName.APOLLO_SERVICE_PREFIX)) {
+        {
             
             let page: DiscoveryPage = DiscoveryPage.getInstance();
             let addr = null;
@@ -131,7 +126,7 @@ export class Zeroconf implements ZeroconfInterface {
 
             console.log("listener: " + this.listener);
             nsd.discoverServices(
-                ServiceName.APOLLO_SERVICE_TYPE, 
+                ServiceName.SERVICE_TYPE, 
                 android.net.nsd.NsdManager.PROTOCOL_DNS_SD, 
                 (this.listener));
             
