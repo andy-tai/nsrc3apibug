@@ -3,6 +3,9 @@
 import { Component, ElementRef, NgZone, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import {Location} from "@angular/common";
 import { RouterExtensions } from "nativescript-angular/router";
+
+import {exit} from 'nativescript-exit';
+
 import {Page} from "ui/page";
 
 import {ServiceNode} from "../../data/service_node";
@@ -71,7 +74,7 @@ export class DiscoveryPage implements OnInit, OnDestroy {
     
     onBack() {
         console.log("on back button");
-        this.router.back();
+        exit();
     }
     
     public add(service: ServiceNode) {
